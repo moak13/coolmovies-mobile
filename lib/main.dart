@@ -1,4 +1,5 @@
 import 'package:coolmovies/core/locator.dart';
+import 'package:coolmovies/ui/views/movies/movies_view.dart';
 import 'package:coolmovies/utils/graph_ql_client.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -56,7 +57,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final ValueNotifier<Map<String, dynamic>?> _data = ValueNotifier(null);
   int _counter = 0;
 
   void _incrementCounter() {
@@ -68,42 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
-  }
-
-  void _fetchData() async {
-    print('Fetching data...');
-    var client = GraphQLProvider.of(context).value;
-
-    final QueryResult result = await client.query(QueryOptions(
-      document: gql(r"""
-          query AllMovies {
-            allMovies {
-              nodes {
-                id
-                imgUrl
-                movieDirectorId
-                userCreatorId
-                title
-                releaseDate
-                nodeId
-                userByUserCreatorId {
-                  id
-                  name
-                  nodeId
-                }
-              }
-            }
-          }
-        """),
-    ));
-
-    if (result.hasException) {
-      print(result.exception.toString());
-    }
-
-    if (result.data != null) {
-      _data.value = result.data!['allMovies'];
-    }
   }
 
   @override
@@ -162,27 +126,16 @@ Good luck! :)""",
                   ),
                 ),
                 OutlinedButton.icon(
-                  onPressed: _fetchData,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MoviesView(),
+                      ),
+                    );
+                  },
                   icon: const Icon(Icons.download),
-                  label: const Text('Fetch data'),
+                  label: const Text('Fetch Movies'),
                 ),
-                const SizedBox(height: 16),
-                ValueListenableBuilder(
-                    valueListenable: _data,
-                    builder: (BuildContext context, Map<String, dynamic>? data,
-                        Widget? _) {
-                      return data != null
-                          ? Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[300],
-                                  border: Border.all(
-                                      color: Colors.grey.shade700, width: 1),
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: Text(data.toString()),
-                            )
-                          : Container();
-                    }),
               ],
             ),
           ),
