@@ -1,15 +1,15 @@
-class UserByUserCreatorId {
+class UserByUserId {
   String? id;
   String? name;
   String? nodeId;
 
-  UserByUserCreatorId({
+  UserByUserId({
     this.id,
     this.name,
     this.nodeId,
   });
 
-  UserByUserCreatorId.fromJson(Map<String, dynamic> json) {
+  UserByUserId.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     nodeId = json['nodeId'];

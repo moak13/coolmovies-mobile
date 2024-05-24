@@ -135,4 +135,10 @@ class _MoviesViewState extends State<MoviesView> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _cubit.disposeState();
+    super.dispose();
+  }
 }

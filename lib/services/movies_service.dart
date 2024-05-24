@@ -29,4 +29,15 @@ class MoviesService {
         AllMovieReviewsResponse.fromJson(json);
     return allMovieReviewsResponse.allMovieReviews?.reviews;
   }
+
+  Future<Review?> postMovieReview(MovieReviewRequest movieReview) async {
+    final json = await _graphQlService.performMutate(
+      mutate: Fixtures.postMovieReview(movieReview),
+    );
+
+    if (json == null) return null;
+    MovieReviewResponse movieReviewResponse =
+        MovieReviewResponse.fromJson(json);
+    return movieReviewResponse.createMovieReview?.review;
+  }
 }

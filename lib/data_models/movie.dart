@@ -1,4 +1,4 @@
-import 'user_by_user_creator_id.dart';
+import 'user_by_user_id.dart';
 
 class Movie {
   String? id;
@@ -8,7 +8,7 @@ class Movie {
   String? title;
   String? releaseDate;
   String? nodeId;
-  UserByUserCreatorId? userByUserCreatorId;
+  UserByUserId? userByUserCreatorId;
 
   Movie({
     this.id,
@@ -30,7 +30,7 @@ class Movie {
     releaseDate = json['releaseDate'];
     nodeId = json['nodeId'];
     userByUserCreatorId = json['userByUserCreatorId'] != null
-        ? UserByUserCreatorId.fromJson(json['userByUserCreatorId'])
+        ? UserByUserId.fromJson(json['userByUserCreatorId'])
         : null;
   }
 

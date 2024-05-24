@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coolmovies/data_models/data_models.dart';
+import 'package:coolmovies/ui/views/create_review/create_review_view.dart';
 import 'package:coolmovies/ui/widgets/busy_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,8 +39,17 @@ class _MovieViewState extends State<MovieView> {
       appBar: AppBar(
         actions: [
           TextButton(
-            onPressed: () {
-              // TODO(moak13): Implement routing to create a review
+            onPressed: () async {
+              final result = await Navigator.of(context).push<bool>(
+                MaterialPageRoute(
+                  builder: (context) => CreateReviewView(
+                    movie: widget.movie,
+                  ),
+                ),
+              );
+              if (result == true) {
+                _cubit.fetchMovieReviews(widget.movie?.id ?? '');
+              }
             },
             child: Text(
               'Leave a Review',
@@ -206,5 +216,11 @@ class _MovieViewState extends State<MovieView> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _cubit.disposeState();
+    super.dispose();
   }
 }
