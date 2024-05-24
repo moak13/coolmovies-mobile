@@ -1,4 +1,4 @@
-import 'package:coolmovies/services/graph_ql_service.dart';
+import 'package:coolmovies/services/services.dart';
 import 'package:coolmovies/utils/graph_ql_client.dart';
 import 'package:get_it/get_it.dart';
 
@@ -10,4 +10,5 @@ Future<void> setupLocator() async {
       graphQLClient: createGraphQLClient(),
     ),
   );
+  locator.registerSingleton<QueueService>(QueueService());
 }
