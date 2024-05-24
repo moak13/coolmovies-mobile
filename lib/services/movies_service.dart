@@ -17,4 +17,16 @@ class MoviesService {
 
     return allMoviesResponseDataModel.allMovies?.movies;
   }
+
+  Future<List<Review>?> fetchMovieReviews(String movieId) async {
+    final json = await _graphQlService.performQuery(
+      query: Fixtures.fetchMovieReviews(movieId),
+    );
+
+    if (json == null) return [];
+
+    AllMovieReviewsResponse allMovieReviewsResponse =
+        AllMovieReviewsResponse.fromJson(json);
+    return allMovieReviewsResponse.allMovieReviews?.reviews;
+  }
 }
