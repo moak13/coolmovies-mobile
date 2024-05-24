@@ -1,3 +1,4 @@
+import 'package:coolmovies/ui/views/movie/movie_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -79,7 +80,13 @@ class _MoviesViewState extends State<MoviesView> {
                             return MovieCard(
                               movie: movie!,
                               onTap: () {
-                                // TODO(moak13): Add routing to movie screen here
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => MovieView(
+                                      movie: movie,
+                                    ),
+                                  ),
+                                );
                               },
                             );
                           },

@@ -19,4 +19,25 @@ class Fixtures {
             }
           }
         """;
+
+  static String fetchMovieReviews(String movieId) {
+    var res = """
+        query {
+          allMovieReviews(
+            filter: {movieId: {equalTo: "$movieId"}}
+          ) {
+            nodes {
+              title
+              body
+              rating
+              movieByMovieId {
+                title
+              }
+            }
+          }
+        }
+        """;
+
+    return res;
+  }
 }
