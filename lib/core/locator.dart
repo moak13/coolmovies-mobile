@@ -11,4 +11,5 @@ Future<void> setupLocator() async {
     ),
   );
   locator.registerSingleton<QueueService>(QueueService());
+  locator.registerLazySingleton<StorageService>(() => StorageService());
 }
