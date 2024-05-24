@@ -31,4 +31,8 @@ class MoviesCubit extends Cubit<MoviesState> {
       emit(const FetchMoviesError(message: 'Something went wrong'));
     }
   }
+
+  void disposeState() {
+    _handlerService.disposeState();
+  }
 }

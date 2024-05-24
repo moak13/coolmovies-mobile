@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:coolmovies/core/locator.dart';
 import 'package:coolmovies/services/services.dart';
-import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
-class HandlerService with ChangeNotifier {
+class HandlerService {
   final ConnectivityService _connectivityService =
       locator.get<ConnectivityService>();
   final QueueService _queueService = locator.get<QueueService>();
@@ -19,12 +18,6 @@ class HandlerService with ChangeNotifier {
   HandlerService() {
     _subscription =
         _connectivityService.connectivityStream.listen(_connectionChange);
-  }
-
-  @override
-  void dispose() {
-    _subscription.cancel();
-    super.dispose();
   }
 
   Future<void> _connectionChange(ConnectivityResult result) async {
@@ -90,5 +83,10 @@ class HandlerService with ChangeNotifier {
       );
       rethrow;
     }
+  }
+
+  void disposeState() {
+    _connectivityService.disposeState();
+    _subscription.cancel();
   }
 }

@@ -28,12 +28,6 @@ class ConnectivityService with ChangeNotifier {
     }
   }
 
-  @override
-  void dispose() {
-    _subscription.cancel();
-    super.dispose();
-  }
-
   void _connectionChange(ConnectivityResult result) {
     try {
       _currentResult = result;
@@ -45,6 +39,10 @@ class ConnectivityService with ChangeNotifier {
         stackTrace: s,
       );
     }
+  }
+
+  void disposeState() {
+    _subscription.cancel();
   }
 
   Future<ConnectivityResult> get connectivityStatus async {
