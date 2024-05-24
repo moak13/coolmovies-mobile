@@ -1,5 +1,4 @@
 import 'package:coolmovies/data_models/data_models.dart';
-import 'package:coolmovies/ui/views/movie/movie_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
