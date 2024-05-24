@@ -1,19 +1,10 @@
-import 'dart:io';
-
+import 'package:coolmovies/core/locator.dart';
+import 'package:coolmovies/utils/graph_ql_client.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-void main() async {
-  final HttpLink httpLink = HttpLink(
-    Platform.isAndroid ? 'http://10.0.2.2:5001/graphql' : 'http://localhost:5001/graphql',
-  );
-
-  ValueNotifier<GraphQLClient> client = ValueNotifier(
-    GraphQLClient(
-      link: httpLink,
-      cache: GraphQLCache(store: InMemoryStore()),
-    ),
-  );
+Future<void> main() async {
+  await setupLocator();
 
   runApp(GraphQLProvider(
     client: client,
@@ -178,11 +169,16 @@ Good luck! :)""",
                 const SizedBox(height: 16),
                 ValueListenableBuilder(
                     valueListenable: _data,
-                    builder: (BuildContext context, Map<String, dynamic>? data, Widget? _) {
+                    builder: (BuildContext context, Map<String, dynamic>? data,
+                        Widget? _) {
                       return data != null
                           ? Container(
                               padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(color: Colors.grey[300], border: Border.all(color: Colors.grey.shade700, width: 1), borderRadius: BorderRadius.circular(4)),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  border: Border.all(
+                                      color: Colors.grey.shade700, width: 1),
+                                  borderRadius: BorderRadius.circular(4)),
                               child: Text(data.toString()),
                             )
                           : Container();
