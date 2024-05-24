@@ -12,6 +12,7 @@ Future<void> setupLocator() async {
       graphQLClient: createGraphQLClient(),
     ),
   );
+  locator.registerLazySingleton<HandlerService>(() => HandlerService());
   locator.registerSingleton<QueueService>(QueueService());
   locator.registerLazySingleton<StorageService>(() => StorageService());
 }
