@@ -13,6 +13,7 @@ Future<void> setupLocator() async {
     ),
   );
   locator.registerLazySingleton<HandlerService>(() => HandlerService());
+  locator.registerLazySingleton<MoviesService>(() => MoviesService());
   locator.registerSingleton<QueueService>(QueueService());
   locator.registerLazySingleton<StorageService>(() => StorageService());
 }
