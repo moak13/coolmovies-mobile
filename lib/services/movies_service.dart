@@ -11,7 +11,6 @@ class MoviesService {
       query: Fixtures.fetchAllMovies,
     );
 
-    if (json == null) return [];
     AllMoviesResponseDataModel allMoviesResponseDataModel =
         AllMoviesResponseDataModel.fromJson(json);
 
@@ -23,8 +22,6 @@ class MoviesService {
       query: Fixtures.fetchMovieReviews(movieId),
     );
 
-    if (json == null) return [];
-
     AllMovieReviewsResponse allMovieReviewsResponse =
         AllMovieReviewsResponse.fromJson(json);
     return allMovieReviewsResponse.allMovieReviews?.reviews;
@@ -35,7 +32,6 @@ class MoviesService {
       mutate: Fixtures.postMovieReview(movieReview),
     );
 
-    if (json == null) return null;
     MovieReviewResponse movieReviewResponse =
         MovieReviewResponse.fromJson(json);
     return movieReviewResponse.createMovieReview?.review;
