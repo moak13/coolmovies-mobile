@@ -40,10 +40,12 @@ dependencies:
   shared_preferences: ^2.2.3
 
 dev_dependencies:
+  bloc_test: ^9.1.7
+  build_runner: ^2.4.9
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.3
+  mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
